@@ -1,0 +1,21 @@
+{% extends "JAGUARETEKAA/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<h2 class="text-faded">Productos de la categoria {{categoriafiltro.descripcion}}</h2>
+<div class="container">
+    {% for un_producto in productosfiltro %}
+    <div class="row">
+      <div class="col-md-1">
+        <img src="{{ un_producto.imagen.url }}" width="75%" height="75%">
+      </div>
+      <div class="col-md-6">
+        <a href="{% url 'detalleproducto' un_producto.id %}" class="link">- {{un_producto.titulo}}: {{un_producto.descripcion}}</a>
+        <a href="{% url 'detalleproducto' un_producto.id %}" class="link">$ {{un_producto.precio}}</a>
+      </div>
+    </div>  
+    {% endfor %} 
+</div>
+
+{% endblock %}

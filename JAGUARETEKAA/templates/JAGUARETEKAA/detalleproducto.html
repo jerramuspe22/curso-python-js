@@ -1,0 +1,38 @@
+{% extends "JAGUARETEKAA/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="container">
+	<h2 align="center" class="text-faded">Detalle del Producto {{ detalleproducto.titulo }}</h2>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="card" style="width: 75%; height: 75%;">
+				<img src="{{detalleproducto.imagen.url}}" class="card-img-top" height="75%" width="75%">
+			</div>
+		</div>
+		<div class="col-md-4" style="color: white">
+			<div class="row">
+				{{detalleproducto.descripcion}}
+			</div>
+			<div class="row">
+				<div class="col-md-4" style="color: white">
+					$ {{detalleproducto.precio}}
+				</div>
+				<div class="col-md-4">
+					<a href="{% url 'carrito:agregar_producto' detalleproducto.id %}" class="btn btn-outline-warning float-end">Agregar al carrito</a>
+				<!--
+					<form name="FormBuscarProducto" class="d-flex" action="" method="post">
+            		{% csrf_token %}
+            		<button class="btn btn-outline-warning float-end" type="submit">Agregar al carrito</button>
+          			</form>
+          		-->
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+	
+{% endblock %}

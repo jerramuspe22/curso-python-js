@@ -1,0 +1,53 @@
+{% extends "JAGUARETEKAA/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h2 class="text-faded">Carrito</h2>
+<table class="table table-borderd" style="color: white;">
+  <thead>
+    <tr>
+      <th colspan="4" class="text-center">
+        Llena el Carrito ;)
+      </th>
+    </tr>
+    <tr>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Suma</th>
+      <th>Precio</th>
+    </tr>
+  </thead>
+
+
+<tbody>
+  {% if request.session.carrito.items %}
+    {% for key, value in request.session.carrito.items %}
+      <tr class="text-center">
+        <td align="left">{{ value.titulo }}</td>
+        <td align="left">{{ value.cantidad }}</td>
+        <td align="left">
+          <a href="{% url 'carrito:agregar_producto' value.producto_id %}" class="btn btn-sm btn-warning">+</a> | 
+          <a href="{% url 'carrito:restar_producto' value.producto_id %}" class="btn btn-sm btn-warning">-</a>
+        </td>
+        <td>$ {{ value.precio }}</td>
+      </tr>
+    {% endfor %}
+  {% else %}
+    <tr>
+      <td colspan="3"></td>
+      <div class="alert alert-danger text-center">
+        Sin productos
+      </div>
+    </tr>
+  {% endif %}
+</tbody>
+
+<tfoot>
+  <tr align="right">
+    <td align="right">
+      Total: {{ importe_total_carrito }}
+    </td>
+  </tr>
+</tfoot>
+</table>
+{% endblock %}

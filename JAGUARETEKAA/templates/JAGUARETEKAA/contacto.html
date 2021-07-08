@@ -1,0 +1,25 @@
+
+{% extends "JAGUARETEKAA/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<h1 class="text-faded">Contactenos</h1>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <p class="text-faded">
+        <form action="/contacto/" method="POST">
+        {% csrf_token %}
+        <p class="text-faded">Asunto: <input type="text" name="asunto"></p>
+        <p class="text-faded">EMail: <input type="text" name="email"></p>
+        <p class="text-faded">Mensaje: <textarea name="mensaje" rows="15" cols="45"></textarea></p>
+        <p><input type="submit" value="Enviar"></p>
+      </form>
+    </p>  
+  </div>
+  </div>
+</div>
+
+
+{% endblock %}

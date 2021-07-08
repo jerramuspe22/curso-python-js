@@ -1,0 +1,44 @@
+{% extends "JAGUARETEKAA/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h2 class="text-faded">Ultimos productos ingresados</h2>
+<!--  -->
+ <div class="container">
+  <div class="row">
+    {% for un_producto in primeros_tres_productos %}
+    <div class="col-md-4" align="center">
+      <div class="card" style="width: 75%; height: 75%;">
+        <img src="{{un_producto.imagen.url}}" class="card-img-top" height="50%" width="50%">
+        <!--<img src="{% static 'JAGUARETEKAA/img/ecommerce.png' %}" class="card-img-top">
+         <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{post.imagen.url}}" alt="" style="width:50%;"> -->
+        <div class="card-body">
+          <h5 class="card-title">{{ un_producto.titulo }}</h5>
+          <p class="card-text text-truncate">{{ un_producto.descripcion }}</p>
+          <!-- <p align="center"><a href="{% url 'detalleproducto' un_producto.id %}" class="btn btn-warning float-center" role="button" data-bs-toggle="button">Ver</a></p> -->
+          <div class="card-footer">
+              <form name="FormBuscarProducto" class="d-flex" action="{% url 'detalleproducto' un_producto.id %}" method="post">
+              {% csrf_token %}
+              <button class="btn btn-outline-warning float-center" type="submit">Ver</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="container">
+    {% for resto_producto in resto_productos %}
+    <div class="row">
+      <div class="col-md-1">
+        <img src="{{ resto_producto.imagen.url }}" width="75%" height="75%">
+      </div>
+      <div class="col-md-6">
+        <a href="{% url 'detalleproducto' resto_producto.id %}" class="link">- {{resto_producto.titulo}}: {{resto_producto.descripcion}}</a>
+      </div>
+    </div>  
+    {% endfor %} 
+</div>
+{% endblock %}
